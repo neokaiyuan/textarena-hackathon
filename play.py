@@ -1,4 +1,6 @@
 from dotenv import load_dotenv
+
+from game_envs import GameEnv
 load_dotenv()
 
 import textarena as ta
@@ -10,14 +12,15 @@ agents = {
 }
 
 # Initialize environment from subset and wrap it
-env = ta.make(env_id="BalancedSubset-v0")
+env = ta.make(env_id=GameEnv.SPELLING_BEE.value)
 env = ta.wrappers.LLMObservationWrapper(env=env)
 env = ta.wrappers.SimpleRenderWrapper(
     env=env,
     player_names={0: "GPT-4o-mini", 1: "claude-3.5-haiku"},
-)
+)   
 
-env.reset()
+env.reset(num_players=2) # Speciically for SpellingBee, we need to specify the number of players
+
 done = False
 while not done:
     player_id, observation = env.get_observation()
