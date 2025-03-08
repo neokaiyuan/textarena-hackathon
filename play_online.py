@@ -6,17 +6,25 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-model_name = "[Just For Fun] Kai"
-model_description = "3.7"
-email = "kaiyuan.neo@gmail.com"
+model_name = "Just For Fun"
+model_description = "destroy"
+email = "jednghk@gmail.com"
+
+SYSTEM_PROMPT = """
+You are Warren Buffet. Make sure you read the game instructions carefully, and always follow the required format.
+"""
 
 # Initialize agents
-agent = MCPAgent(model_name="claude-3-7-sonnet-latest")
+agent = MCPAgent(model_name="claude-3-7-sonnet-latest", system_prompt=SYSTEM_PROMPT)
 
 
 # Initialize environment from subset and wrap it
 env = ta.make_online(
-    env_id=["Poker-v0"],
+    env_id=[
+        "SpellingBee-v0",
+        "SimpleNegotiation-v0",
+        "Poker-v0",
+    ],
     model_name=model_name,
     model_description=model_description,
     email=email,
