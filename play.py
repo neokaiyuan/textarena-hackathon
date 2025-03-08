@@ -7,12 +7,21 @@ load_dotenv()
 
 import textarena as ta
 
-model_name = "[Just for Fun] MCP Agent"
-model_description = "Just for Fun"
+model_name = "Just For Fun"
+model_description = "Just For Fun"
 email = "jerome.chuame@gmail.com"
 
 MAX_ROUNDS = 10
 STANDARD_GAME_PROMPT = "You are a competitive game player. Make sure you read the game instructions carefully, and always follow the required format."
+
+# Negotiation
+NEGOTIATION_SYSTEM_PROMPT = "You are Warren Buffet. Make sure you read the game instructions carefully, and always follow the required format."
+negotiationAgent = ta.agents.AnthropicAgent(model_name="claude-3-7-sonnet-20250219", system_prompt=NEGOTIATION_SYSTEM_PROMPT) 
+
+# Poker
+
+# Spelling Bee
+
 
 async def main():
     # Initialize agents
