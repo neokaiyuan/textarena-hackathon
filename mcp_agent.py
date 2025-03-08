@@ -11,7 +11,7 @@ class MCPAgent(AsyncAnthropicAgent):
         super().__init__(*args, **kwargs)
 
         self.url = smithery.create_smithery_url(
-            "wss://server.smithery.ai/e2b/ws", {"e2bApiKey": os.environ["E2B_API_KEY"]}
+            "wss://server.smithery.ai/exa/ws", {"exaApiKey": os.environ["EXA_API_KEY"]}
         )
 
     async def _make_request(self, observation: str) -> str:
@@ -79,7 +79,7 @@ class MCPAgent(AsyncAnthropicAgent):
                                     if "MCP error" in str(e):
                                         tool_result_dict = {"error": str(e)}
 
-                                result_str = json.dumps(tool_result_dict)
+                                result_str = json.dumps(tool_result_dict)[:20000]
                                 print(f"Tool result: {result_str}")
 
                                 # Add tool call and result to messages

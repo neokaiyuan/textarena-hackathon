@@ -17,10 +17,10 @@ agents = {
 # Initialize environment from subset and wrap it
 env = ta.make(env_id=["Poker-v0"])
 env = ta.wrappers.LLMObservationWrapper(env=env)
-env = ta.wrappers.SimpleRenderWrapper(
-    env=env,
-    player_names={0: "sonnet", 1: "haiku"},
-)
+# env = ta.wrappers.SimpleRenderWrapper(
+#     env=env,
+#     player_names={0: "sonnet", 1: "haiku"},
+# )
 
 
 async def run_game():
