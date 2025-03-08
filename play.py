@@ -7,7 +7,7 @@ import textarena as ta
 # Initialize agents
 agents = {
     0: ta.agents.AWSBedrockAgent(
-        model_id="anthropic.claude-3-5-sonnet-20240620-v1:0", region_name="us-west-2"
+        model_id="anthropic.claude-3-5-sonnet-20241022-v2:0", region_name="us-west-2"
     ),
     1: ta.agents.AWSBedrockAgent(
         model_id="anthropic.claude-3-5-haiku-20241022-v1:0", region_name="us-west-2"
