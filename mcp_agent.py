@@ -1,10 +1,9 @@
 import textarena as ta
+from textarena.agents.basic_agents import AsyncAnthropicAgent
 import smithery
 import mcp
 import os
 import json
-
-from agents.AsyncAnthropicAgent import AsyncAnthropicAgent
 
 
 class MCPAgent(AsyncAnthropicAgent):
@@ -12,13 +11,14 @@ class MCPAgent(AsyncAnthropicAgent):
         super().__init__(*args, **kwargs)
 
         self.url = smithery.create_smithery_url(
-            "wss://server.smithery.ai/e2b/ws", {"e2bApiKey": os.environ["E2B_API_KEY"]}
+            "wss://server.smithery.ai/exa/ws", {"exaApiKey": os.environ["EXA_API_KEY"]}
         )
 
     async def _make_request(self, observation: str) -> str:
         """Make a single API request to Anthropic and return the generated message."""
         async with smithery.websocket_client(self.url) as streams:
             async with mcp.client.session.ClientSession(*streams) as session:
+
                 try:
                     tools_result = await session.list_tools()
                     tools = tools_result.model_dump()["tools"]
@@ -79,7 +79,7 @@ class MCPAgent(AsyncAnthropicAgent):
                                     if "MCP error" in str(e):
                                         tool_result_dict = {"error": str(e)}
 
-                                result_str = json.dumps(tool_result_dict)
+                                result_str = json.dumps(tool_result_dict)[:20000]
                                 print(f"Tool result: {result_str}")
 
                                 # Add tool call and result to messages
